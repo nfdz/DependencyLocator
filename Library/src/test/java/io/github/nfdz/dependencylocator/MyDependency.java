@@ -1,22 +1,33 @@
 package io.github.nfdz.dependencylocator;
 
+/**
+ * Dummy implementation of a Dependency.
+ */
 public class MyDependency implements Dependency {
+
+    public String tag;
+
+    public MyDependency(String tag) {
+        this.tag = tag;
+    }
 
     public static class MyDependencyProvider implements DependencyProvider {
 
         public boolean created = false;
-        public boolean initialized = false;
         public boolean destroyed = false;
+        public String tag = "";
+
+        public MyDependencyProvider() {
+        }
+
+        public MyDependencyProvider(String tag) {
+            this.tag = tag;
+        }
 
         @Override
         public Dependency create() {
             created = true;
-            return new MyDependency();
-        }
-
-        @Override
-        public void initialize(Dependency dependency) {
-            initialized = true;
+            return new MyDependency(tag);
         }
 
         @Override

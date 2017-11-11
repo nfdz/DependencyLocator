@@ -8,10 +8,17 @@ import java.lang.reflect.Modifier;
 
 import static org.junit.Assert.*;
 
+/**
+ * This set of tests checks that basic functionality and behaviour is correct.
+ */
 public class MainTest {
 
+    /**
+     * Reset instance of DependencyLocator each time before run a test in order to avoid problems running several
+     * test sharing same instance.
+     */
     @Before
-    public void resetSingleton() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+    public void resetDependencyLocator() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
         Field instance = DependencyLocator.class.getDeclaredField("INSTANCE");
         instance.setAccessible(true);
         Field modifiersField = Field.class.getDeclaredField("modifiers");
@@ -20,6 +27,9 @@ public class MainTest {
         instance.set(null, new DependencyLocatorImpl());
     }
 
+    /**
+     * Check that DependencyLocator provides a valid dependency and destroys it after release.
+     */
     @Test
     public void testProvideDependency() {
 
@@ -29,7 +39,6 @@ public class MainTest {
 
         assertNotNull(dependency);
         assertTrue(provider.created);
-        assertTrue(provider.created);
         assertFalse(provider.destroyed);
 
         DependencyLocator.release(dependency);
@@ -37,6 +46,9 @@ public class MainTest {
 
     }
 
+    /**
+     * Check that DependencyLocator provides same singleton dependency and destroys it when has been released by all.
+     */
     @Test
     public void testProvideSingletonDependency() {
 
@@ -51,7 +63,6 @@ public class MainTest {
         assertNotNull(dependency3);
 
         assertEquals(provider.createCounter, 1);
-        assertEquals(provider.initializeCounter, 1);
 
         DependencyLocator.release(dependency1);
 
@@ -61,19 +72,30 @@ public class MainTest {
         DependencyLocator.release(dependency3);
 
         assertEquals(provider.destroyCounter, 1);
+
     }
 
+    /**
+     * Check that DependencyLocator overrides successfully a DependencyProvider when it has not been used.
+     */
     @Test
     public void testOverrideProvider() {
 
-        MyDependency.MyDependencyProvider provider1 = new MyDependency.MyDependencyProvider();
-        MyDependency.MyDependencyProvider provider2 = new MyDependency.MyDependencyProvider();
+        MyDependency.MyDependencyProvider provider1 = new MyDependency.MyDependencyProvider("1");
+        MyDependency.MyDependencyProvider provider2 = new MyDependency.MyDependencyProvider("2");
 
         DependencyLocator.provide(MyDependency.class, provider1);
         DependencyLocator.provide(MyDependency.class, provider2);
 
+        MyDependency dependency = (MyDependency)DependencyLocator.locate(MyDependency.class);
+        assertEquals(dependency.tag, "2");
+
     }
 
+    /**
+     * Check that DependencyLocator launches an exception when it tries to override a DependencyProvider
+     * that has already used.
+     */
     @Test(expected = DependencyLocatorException.class)
     public void testOverrideUsedProvider() {
 
