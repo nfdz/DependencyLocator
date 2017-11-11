@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 
 import static org.junit.Assert.*;
 
@@ -11,9 +12,12 @@ public class MainTest {
 
     @Before
     public void resetSingleton() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-        Field instance = DependencyLocator.class.getDeclaredField("instance");
+        Field instance = DependencyLocator.class.getDeclaredField("INSTANCE");
         instance.setAccessible(true);
-        instance.set(null, null);
+        Field modifiersField = Field.class.getDeclaredField("modifiers");
+        modifiersField.setAccessible(true);
+        modifiersField.setInt(instance, instance.getModifiers() & ~Modifier.FINAL);
+        instance.set(null, new DependencyLocatorImpl());
     }
 
     @Test
