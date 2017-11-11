@@ -1,24 +1,33 @@
 package io.github.nfdz.dependencylocator;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class DependencyLocator {
 
     private static final String NO_PROVIDER_ERROR = "There is no provider available for given dependency class";
+    private static final String PROVIDER_USED_ERROR = "The dependency provider that you want to override has already been used";
 
     private static final Map<Class, DependencyProvider> providersMap = new ConcurrentHashMap<>();
     private static final Map<Class,Dependency> singletonDependenciesMap = new ConcurrentHashMap<>();
     private static final Map<Class,AtomicInteger> singletonDependenciesCounterMap = new ConcurrentHashMap<>();
     private static final ReentrantLock singletonLock = new ReentrantLock();
+    private static final Set<Class> usedProviders = new CopyOnWriteArraySet<>();
 
     public static void provide(Class<? extends Dependency> dependencyClass, DependencyProvider provider) {
+        // TODO Use other approach to know if a provider was used because this one could has leaks
+        if (usedProviders.contains(dependencyClass)) {
+            throw new DependencyLocatorException(PROVIDER_USED_ERROR);
+        }
         providersMap.put(dependencyClass, provider);
     }
 
     public static Dependency locate(Class<? extends Dependency> dependencyClass) {
+        usedProviders.add(dependencyClass);
         if (isSingleton(dependencyClass)) {
             return locateSingletonDependency(dependencyClass);
         } else {
