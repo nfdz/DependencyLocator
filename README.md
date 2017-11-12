@@ -7,15 +7,15 @@ To use it you just have to do the following:
  * Implement `Dependency` or  `SingletonDependency` interface.
  * Implement `DependencyProvider` that know how to create previous dependency.
  * Supply these provider to `DependencyLocator` in some point before use the dependencies (for instance at the entry point of your application).
-   ```java
+```java
 DependencyLocator.provide(MyDependency.class, new MyDependencyProvider());
 ```
  * Locate this dependency where and when you want to use:
-   ```java
+```java
 MyDependency dependency = (MyDependency)DependencyLocator.locate(MyDependency.class);
 ```
  * Optional: Release this dependency when you do not need use it anymore:
-   ```java
+```java
 DependencyLocator.release(dependency);
 ```
 
