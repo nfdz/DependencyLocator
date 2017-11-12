@@ -36,7 +36,11 @@ public class DependencyLocatorImpl {
         if (usedProviders.contains(dependencyClass)) {
             throw new DependencyLocatorException(PROVIDER_USED_ERROR);
         }
-        providersMap.put(dependencyClass, provider);
+        if (provider == null) {
+            providersMap.remove(dependencyClass);
+        } else {
+            providersMap.put(dependencyClass, provider);
+        }
     }
 
     /**
