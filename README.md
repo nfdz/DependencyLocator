@@ -20,6 +20,8 @@ MyDependency dependency = (MyDependency)DependencyLocator.locate(MyDependency.cl
 DependencyLocator.release(dependency);
 ```
 
+In the [Demo folder](https://github.com/nfdz/DependencyLocator/tree/master/Demo) there is an example of a Java project with three dependencies, one of them nested.
+
 ## Download
 
 ### Jitpack
