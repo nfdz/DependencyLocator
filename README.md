@@ -39,11 +39,11 @@ It is very use integrate this library in your project as a dependency of your bu
    }
    ```
 
-Jitpack works with several build systems, please checkout the [documentation][https://jitpack.io/docs/BUILDING/] if you need help with yours.
+Jitpack works with several build systems, please checkout the [documentation](https://jitpack.io/docs/BUILDING/) if you need help with yours.
 
 ### Manual JAR
 
-You can download library JAR file from [releases][https://github.com/nfdz/DependencyLocator/releases] webpage of the github project.
+You can download library JAR file from [releases](https://github.com/nfdz/DependencyLocator/releases) webpage of the github project.
 
 ## License
 
