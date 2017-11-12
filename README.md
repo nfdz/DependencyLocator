@@ -1,6 +1,6 @@
 # DependencyLocator
 
-Library for dependency inversion in Java/Android using service locator pattern very easy to use and lightweight. It was designed to be very quick to learn to use and ease to work with dependency inversion for those who have been using this type of design pattern in other types of frameworks and languages. I have avoided using the word Service since this concept is linked to other types of functionalities in Android.
+Library for dependency inversion in Java/Android using service locator pattern very easy to use and lightweight. It was designed to be very quick to learn. With this library you have no excuse to not implement dependency inversion in your project from the first moment. It is very easy to use for those who have been using this design pattern in other frameworks and languages. I have avoided using the word 'Service' since this concept is linked to other types of functionalities in Android.
 
 To use it you just have to do the following:
 
@@ -19,5 +19,18 @@ MyDependency dependency = (MyDependency)DependencyLocator.locate(MyDependency.cl
 DependencyLocator.release(dependency);
 ```
 
+## License
 
+    Copyright 2017 nfdz
 
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
