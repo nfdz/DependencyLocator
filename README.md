@@ -1,4 +1,5 @@
 # DependencyLocator
+[![](https://jitpack.io/v/nfdz/DependencyLocator.svg)](https://jitpack.io/#nfdz/DependencyLocator)
 
 Library for dependency inversion in Java/Android using service locator pattern very easy to use and lightweight. It was designed to be very quick to learn. With this library you have no excuse to not implement dependency inversion in your project from the first moment. It is very easy to use for those who have been using this design pattern in other frameworks and languages. I have avoided using the word 'Service' since this concept is linked to other types of functionalities in Android.
 
@@ -18,6 +19,31 @@ MyDependency dependency = (MyDependency)DependencyLocator.locate(MyDependency.cl
 ```java
 DependencyLocator.release(dependency);
 ```
+
+## Download
+
+### Jitpack
+
+It is very use integrate this library in your project as a dependency of your build system thanks to Jitpack. If you use gradle, you just have to add the following in your 'build.gradle' file:
+
+   ```gradle
+   allprojects {
+	 repositories {
+	 ...
+         maven { url 'https://jitpack.io' }
+      }
+   }
+   ...
+   dependencies {
+      compile 'com.github.nfdz:DependencyLocator:v1.0.0'
+   }
+   ```
+
+Jitpack works with several build systems, please checkout the [documentation][https://jitpack.io/docs/BUILDING/] if you need help with yours.
+
+### Manual JAR
+
+You can download library JAR file from [releases][https://github.com/nfdz/DependencyLocator/releases] webpage of the github project.
 
 ## License
 
