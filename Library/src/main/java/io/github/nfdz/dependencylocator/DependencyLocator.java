@@ -15,7 +15,7 @@ public class DependencyLocator {
      * @param provider
      * @throws DependencyLocatorException
      */
-    public static void provide(Class<? extends Dependency> dependencyClass, DependencyProvider provider) {
+    public static void provide(Class<? extends Dependency> dependencyClass, DependencyProvider provider) throws DependencyLocatorException {
         INSTANCE.provide(dependencyClass, provider);
     }
 
@@ -26,7 +26,7 @@ public class DependencyLocator {
      * @return Dependency
      * @throws DependencyLocatorException
      */
-    public static Dependency locate(Class<? extends Dependency> dependencyClass) {
+    public static Dependency locate(Class<? extends Dependency> dependencyClass) throws DependencyLocatorException {
         return INSTANCE.locate(dependencyClass);
     }
 

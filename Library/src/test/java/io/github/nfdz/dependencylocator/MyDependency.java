@@ -15,6 +15,8 @@ public class MyDependency implements Dependency {
 
         public boolean created = false;
         public boolean destroyed = false;
+        public int createCounter = 0;
+        public int destroyCounter = 0;
         public String tag = "";
 
         public MyDependencyProvider() {
@@ -27,12 +29,14 @@ public class MyDependency implements Dependency {
         @Override
         public Dependency create() {
             created = true;
+            createCounter++;
             return new MyDependency(tag);
         }
 
         @Override
         public void destroy(Dependency dependency) {
             destroyed = true;
+            destroyCounter++;
         }
     }
 
