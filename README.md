@@ -1,7 +1,10 @@
+
+⚠️  **This project has been discontinued** ⚠️
+
 # DependencyLocator
 [![](https://jitpack.io/v/nfdz/DependencyLocator.svg)](https://jitpack.io/#nfdz/DependencyLocator)
 
-Library for dependency inversion in Java/Android using service locator pattern very easy to use and lightweight. It was designed to be very quick to learn. With this library you have no excuse to not implement dependency inversion in your project from the first moment. It is very easy to use for those who have been using this design pattern in other frameworks and languages. I have avoided using the word 'Service' since this concept is linked to other types of functionalities in Android.
+Library for Dependency Inversion in Java/Android using Service Locator pattern. Easy and lightweight.
 
 To use it you just have to do the following:
 
